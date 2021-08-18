@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class HeroApp2 {
     public static void main(String[] args) {
@@ -17,15 +14,21 @@ public class HeroApp2 {
         Hero thunderWoman = new Hero("Karina", "Baiga", 707, "ThunderWoman", 4002.15, 19);
         Hero userHero = new Hero();
 
-        //ADDING AN ARRAYLIST TO STORE SUPERHERO NAMES (heroList)
-        ArrayList<String> superHeroes = new ArrayList<>();
-        superHeroes.add(dogoMom.getHeroName());
-        superHeroes.add(superCat.getHeroName());
-        superHeroes.add(peopleWhisperer.getHeroName());
-        superHeroes.add(toolMan.getHeroName());
-        superHeroes.add(mrForest.getHeroName());
-        superHeroes.add(rain.getHeroName());
-        superHeroes.add(thunderWoman.getHeroName());
+        //ADDING AN ARRAYLIST TO STORE ALL SUPERHEROS (superHeroes)
+        ArrayList<Hero> superHeroes = new ArrayList<>();
+        superHeroes.add(dogoMom);
+        superHeroes.add(superCat);
+        superHeroes.add(peopleWhisperer);
+        superHeroes.add(toolMan);
+        superHeroes.add(mrForest);
+        superHeroes.add(rain);
+        superHeroes.add(thunderWoman);
+
+
+//        //Alphabetically sorting the arraylist
+//        System.out.println(bubbleSortByName(superHeroes));
+//        System.out.println();
+
 
         Villain drBad = new Villain("David", "Winters", 999, "DrBad", 3512.99, 39);
         Villain ladyWrath = new Villain("Karen", "Typical", 888, "LadyWrath", 4987, 90);
@@ -33,6 +36,13 @@ public class HeroApp2 {
         Villain drBat = new Villain("Bob", "Butters", 666, "DrBat", 575.39, 18);
         Villain mrMeow = new Villain("Smelly", "Cat", 555, "MrMeow", 1999, 41);
 
+        //ADDING AN ARRAYLIST TO STORE ALL VILLAINS (allVillains)
+        ArrayList<Villain> allVillains = new ArrayList<>();
+        allVillains.add(drBad);
+        allVillains.add(ladyWrath);
+        allVillains.add(landShark);
+        allVillains.add(drBat);
+        allVillains.add(mrMeow);
 
         District district12 = new District("District 12", "DellCity", 12);
         District district1 = new District("District 1", "Capitol", 1);
@@ -88,12 +98,19 @@ public class HeroApp2 {
                 case 1:
                     System.out.println("================= SUPERHERO LIST ================");
                     //printing a list of all existing superheroes using methods
-                    for (int i = 0; i < allDistricts.size(); i++) {
-                        District district = allDistricts.get(i);
-                        for (String s : district.districtHeroList()) {
-                            System.out.println(s);
-                        }
+//                    for (int i = 0; i < allDistricts.size(); i++) {
+//                        District district = allDistricts.get(i);
+//                        for (String s : district.districtHeroList()) {
+//                            System.out.println(s);
+//                        }
+//                    }
+                    int index = 0;
+                    for (int i = 0; i < superHeroes.size(); i++) {
+                        Hero hero = superHeroes.get(i);
+                        index++;
+                        System.out.println(index + " | " + hero.getHeroName());
                     }
+
                     System.out.println("================= SUPERHERO LIST ================");
                     System.out.println();
                     break;
@@ -137,6 +154,7 @@ public class HeroApp2 {
                     } else
                         System.out.println("Sorry, such district doesn't exist!");
                     System.out.println();
+                    superHeroes.add(userHero);
 
                     System.out.println("***YOUR HERO'S INFORMATION***");
                     System.out.println(userHero);
@@ -307,9 +325,11 @@ public class HeroApp2 {
                     }
                     break;
                 case 4:
-                    System.out.println("Please enter the name of hero you want to delete from the list: ");
-                    String heroToDelete = scannerTwo.next();
+                    System.out.println("Please enter the index number of hero you want to delete from the list: ");
+                    int heroToDelete = scannerTwo.nextInt();
+                    superHeroes.remove(heroToDelete - 1);
 
+                    //NEED TO MAKE SURE THIS ALSO REMOVES HERO FROM THE DISTRICT
 
 
 
@@ -321,6 +341,29 @@ public class HeroApp2 {
         while (menuEntry != 0);
 
 
+
+
+
     }
+
+
+
+    //BUBBLE SORT A STRING ARRAYLIST ALPHABETICALLY
+    public static ArrayList<Hero> bubbleSortByName (ArrayList<Hero> superHeroes) {
+        for (int i = 0; i < superHeroes.size(); i++) {
+            for (int j = i+1; j < superHeroes.size() ; j++) {
+                if (superHeroes.get(j).equals(superHeroes.get(i))) {
+                    Hero temp = superHeroes.get(j);
+                    superHeroes.set(j, superHeroes.get(i));
+                    superHeroes.set(i, temp);
+                }
+            }
+
+            superHeroes.get(i);
+        }
+        return superHeroes;
+    }
+
+
 }
 

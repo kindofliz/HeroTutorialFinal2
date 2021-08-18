@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Hero extends Person {
 
     //Attributes/Properties
@@ -22,6 +24,9 @@ public class Hero extends Person {
         this.deedTime = deedTime;
 
     }
+
+    //custom methods
+
 
     //toString() is the method where information about the object values are returned as String value.
     @Override
@@ -89,7 +94,5 @@ public class Hero extends Person {
     public void setDeedTime(int deedTime) {
         this.deedTime = deedTime;
     }
-
-
 
 }

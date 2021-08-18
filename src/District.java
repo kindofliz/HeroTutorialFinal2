@@ -8,6 +8,7 @@ public class District {
     private int DistrictID;
     ArrayList<Person> personInTheDistrict = new ArrayList<Person>();
 
+
     //no-argument constructor
     public District() {
     }
@@ -25,8 +26,9 @@ public class District {
         return personInTheDistrict.add(person);
     }
 
-
     public Person removePerson(int index) { return personInTheDistrict.remove(index); }
+
+
 
 
     // is a method where total heroes’ levels will be summarized and divided by the amount of the hero in this District.
@@ -76,6 +78,7 @@ public class District {
     }
 
     //GETTERS AND SETTERS
+
     public String getTitle() {
         return title;
     }

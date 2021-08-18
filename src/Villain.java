@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Villain extends Person {
 
     //Attributes/Properties
@@ -28,9 +30,10 @@ public class Villain extends Person {
         return Math.round(crimeTime/avgOneCrimeTime);
     }
 
+
+
+
     //toString method
-
-
     @Override
     public String toString() {
         return "Villain{" +
@@ -75,4 +78,6 @@ public class Villain extends Person {
     public void setCrimeTime(int crimeTime) {
         this.crimeTime = crimeTime;
     }
+
+
 }
