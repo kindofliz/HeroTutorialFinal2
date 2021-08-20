@@ -28,7 +28,9 @@ public class District {
 
     public Person removePerson(int index) { return personInTheDistrict.remove(index); }
 
-
+    public boolean removePersonObject (Person person) {
+        return personInTheDistrict.remove(person);
+    }
 
 
     // is a method where total heroes’ levels will be summarized and divided by the amount of the hero in this District.

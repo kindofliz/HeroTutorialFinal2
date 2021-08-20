@@ -24,10 +24,8 @@ public class HeroApp2 {
         superHeroes.add(rain);
         superHeroes.add(thunderWoman);
 
-
-//        //Alphabetically sorting the arraylist
-//        System.out.println(bubbleSortByName(superHeroes));
-//        System.out.println();
+        //Alphabetically sorting the arraylist of objects via comparator class method
+        superHeroes.sort(new HeroNameSorter());
 
 
         Villain drBad = new Villain("David", "Winters", 999, "DrBad", 3512.99, 39);
@@ -43,6 +41,10 @@ public class HeroApp2 {
         allVillains.add(landShark);
         allVillains.add(drBat);
         allVillains.add(mrMeow);
+
+        //Alphabetically sorting the arraylist of objects via comparator class method
+        allVillains.sort(new VillainNameSorter());
+
 
         District district12 = new District("District 12", "DellCity", 12);
         District district1 = new District("District 1", "Capitol", 1);
@@ -97,7 +99,7 @@ public class HeroApp2 {
             switch (menuEntry) {
                 case 1:
                     System.out.println("================= SUPERHERO LIST ================");
-                    //printing a list of all existing superheroes using methods
+                    //printing a list of all existing superheroes in districts using methods
 //                    for (int i = 0; i < allDistricts.size(); i++) {
 //                        District district = allDistricts.get(i);
 //                        for (String s : district.districtHeroList()) {
@@ -156,13 +158,12 @@ public class HeroApp2 {
                     System.out.println();
                     superHeroes.add(userHero);
 
-                    System.out.println("***YOUR HERO'S INFORMATION***");
-                    System.out.println(userHero);
+                    System.out.println("Hero successfully added!");
                     System.out.println();
                     break;
                 case 3:
-                    //Using if or switch functions show specific hero information
-                    System.out.println("Which superhero info to print? Enter a name from the superhero list!");
+                    //Using if or switch functions to show specific hero information
+                    System.out.println("Enter a hero name from the superhero list!");
                     System.out.println("Or type " + "MyHero" + " to see information on the hero you created!");
                     String superHeroList = scannerTwo.next().toUpperCase(Locale.ROOT);
 
@@ -326,10 +327,26 @@ public class HeroApp2 {
                     break;
                 case 4:
                     System.out.println("Please enter the index number of hero you want to delete from the list: ");
-                    int heroToDelete = scannerTwo.nextInt();
-                    superHeroes.remove(heroToDelete - 1);
+                    int heroToDeleteInd = scannerTwo.nextInt();
 
-                    //NEED TO MAKE SURE THIS ALSO REMOVES HERO FROM THE DISTRICT
+                    //Find this hero's name and print it before deleting it (to maintain index order)
+                    Hero thisHero = superHeroes.get(heroToDeleteInd-1);
+                    System.out.println("Deleted hero: " + thisHero.getHeroName());
+                    System.out.println();
+
+
+                    //Delete this hero from their district
+                    for (int i = 0; i < allDistricts.size(); i++) {
+                        District district = allDistricts.get(i);
+                        if (district.personInTheDistrict.contains(superHeroes.get(heroToDeleteInd - 1))) {
+                            district.removePersonObject(thisHero);
+
+                        }
+                    }
+
+
+                    //Finally, delete the hero from hero arraylist
+                    superHeroes.remove(heroToDeleteInd - 1);
 
 
 
@@ -348,11 +365,14 @@ public class HeroApp2 {
 
 
 
-    //BUBBLE SORT A STRING ARRAYLIST ALPHABETICALLY
+
+
+
+    //BUBBLE SORT A STRING ARRAYLIST ALPHABETICALLY //doesn't work on object arraylist
     public static ArrayList<Hero> bubbleSortByName (ArrayList<Hero> superHeroes) {
         for (int i = 0; i < superHeroes.size(); i++) {
             for (int j = i+1; j < superHeroes.size() ; j++) {
-                if (superHeroes.get(j).equals(superHeroes.get(i))) {
+                if (superHeroes.get(j).getHeroName().equals(superHeroes.get(i).getHeroName())) {
                     Hero temp = superHeroes.get(j);
                     superHeroes.set(j, superHeroes.get(i));
                     superHeroes.set(i, temp);
@@ -364,6 +384,24 @@ public class HeroApp2 {
         return superHeroes;
     }
 
+
+
+    //HeroNameSorter comparator class (HowToDoInJava.com)
+    public static class HeroNameSorter implements Comparator<Hero> {
+        @Override
+        public int compare(Hero o1, Hero o2) {
+            return o1.getHeroName().compareToIgnoreCase(o2.getHeroName());
+        }
+    }
+
+
+    //VillainNameSorter comparator class (HowToDoInJava.com)
+    public static class VillainNameSorter implements Comparator<Villain> {
+        @Override
+        public int compare(Villain o1, Villain o2) {
+            return o1.getVillainName().compareToIgnoreCase(o2.getVillainName());
+        }
+    }
 
 }
 
