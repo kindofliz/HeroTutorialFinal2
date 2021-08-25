@@ -123,7 +123,7 @@ public class HeroApp2 {
                     userHero.setHeroName(newHeroName);
 
                     //Asking user to input hero's real name and validating it's alphabetical
-                    String newHeroRealName = "";
+                    String newHeroRealName;
                     int checkName = 0;
 
                     do {
@@ -139,7 +139,7 @@ public class HeroApp2 {
 
 
                     //Asking user to input hero's surname and validating it's alphabetical
-                    String newHeroSurname = "";
+                    String newHeroSurname;
                     int checkSurname = 0;
 
                     do {
@@ -171,7 +171,8 @@ public class HeroApp2 {
                 userHero.setHeroSalary(userHero.calculatedSalary());
 
                 //Asking user to pick their hero's district
-                System.out.println("Enter the District this hero will live in (DISTRICT1 (\"d1\") | DISTRICT12 (\"d12\")| DISTRICT16 (\"d16\")): ");
+                System.out.println("Choose the District this hero will live in!");
+                System.out.println("DISTRICT1 (type -> \"d1\") | DISTRICT12 (type -> \"d12\")| DISTRICT16 (type -> \"d16\")): ");
                 String userHeroDistrict = scannerTwo.next();
                 if (userHeroDistrict.equalsIgnoreCase("d1")) {
                     district1.addNewPerson(userHero);
