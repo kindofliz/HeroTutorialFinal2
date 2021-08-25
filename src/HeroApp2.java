@@ -141,11 +141,11 @@ public class HeroApp2 {
                     int newHeroDeedTime = scannerTwo.nextInt();
                     userHero.setDeedTime(newHeroDeedTime);
 
-                    //Setting userHero salary using a custom method
+                    //Calculating and setting userHero salary using a custom method
                     userHero.setHeroSalary(userHero.calculatedSalary());
 
-                    //Asking user to pick hero's district
-                    System.out.println("Enter the District this hero lives in (DISTRICT1 | DISTRICT12 | DISTRICT16): ");
+                    //Asking user to pick their hero's district
+                    System.out.println("Enter the District this hero will live in (DISTRICT1 | DISTRICT12 | DISTRICT16): ");
                     String userHeroDistrict = scannerTwo.next();
                     if (userHeroDistrict.equalsIgnoreCase("district1")) {
                         district1.addNewPerson(userHero);
@@ -162,9 +162,9 @@ public class HeroApp2 {
                     System.out.println();
                     break;
                 case 3:
-                    //Using if or switch functions to show specific hero information
-                    System.out.println("Enter a hero name from the superhero list!");
-                    System.out.println("Or type " + "MyHero" + " to see information on the hero you created!");
+                    //Using another switch-case to show specific hero information
+                    System.out.println("Enter a hero name from the superhero list: ");
+                    System.out.println("(To see information on the hero you created Type \"MyHero\"!)");
                     String superHeroList = scannerTwo.next().toUpperCase(Locale.ROOT);
 
                     switch (superHeroList) {
@@ -321,8 +321,7 @@ public class HeroApp2 {
                             System.out.println();
                             break;
                         default:
-                            System.out.println("Something went wrong. Try again!");
-                            break;
+                            System.out.println("Something went wrong.. Try again!");
                     }
                     break;
                 case 4:
@@ -330,7 +329,7 @@ public class HeroApp2 {
                     int heroToDeleteInd = scannerTwo.nextInt();
 
                     //Find this hero's name and print it before deleting it (to maintain index order)
-                    Hero thisHero = superHeroes.get(heroToDeleteInd-1);
+                    Hero thisHero = superHeroes.get(heroToDeleteInd - 1);
                     System.out.println("Deleted hero: " + thisHero.getHeroName());
                     System.out.println();
 
@@ -348,43 +347,21 @@ public class HeroApp2 {
                     //Finally, delete the hero from hero arraylist
                     superHeroes.remove(heroToDeleteInd - 1);
 
-
-
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + menuEntry);
+                    if (menuEntry != 0)
+                        System.out.println("Menu item does not exist!");
+                        System.out.println();
+
             }
         }
         while (menuEntry != 0);
 
 
-
-
-
     }
 
 
-
-
-
-
-    //BUBBLE SORT A STRING ARRAYLIST ALPHABETICALLY //doesn't work on object arraylist
-    public static ArrayList<Hero> bubbleSortByName (ArrayList<Hero> superHeroes) {
-        for (int i = 0; i < superHeroes.size(); i++) {
-            for (int j = i+1; j < superHeroes.size() ; j++) {
-                if (superHeroes.get(j).getHeroName().equals(superHeroes.get(i).getHeroName())) {
-                    Hero temp = superHeroes.get(j);
-                    superHeroes.set(j, superHeroes.get(i));
-                    superHeroes.set(i, temp);
-                }
-            }
-
-            superHeroes.get(i);
-        }
-        return superHeroes;
-    }
-
-
+    //SEPARATED METHODS
 
     //HeroNameSorter comparator class (HowToDoInJava.com)
     public static class HeroNameSorter implements Comparator<Hero> {
