@@ -118,19 +118,41 @@ public class HeroApp2 {
                     break;
                 case 2:
                     //Asking user to input heroName
-                    System.out.println("Enter the HERO NAME of the hero you'd like to add: ");
+                    System.out.println("Enter the HERONAME of the hero you'd like to add: ");
                     String newHeroName = scannerTwo.next();
                     userHero.setHeroName(newHeroName);
 
-                    //Asking user to input hero's real name
-                    System.out.println("What's your hero's real name?");
-                    String newHeroRealName = scannerTwo.next();
-                    userHero.setName(newHeroRealName);
+                    //Asking user to input hero's real name and validating it's alphabetical
+                    String newHeroRealName = "";
+                    int checkName = 0;
 
-                    //Asking user to input hero's surname
-                    System.out.println("What's your hero's surname?");
-                    String newHeroSurname = scannerTwo.next();
-                    userHero.setSurname(newHeroSurname);
+                    do {
+                        System.out.println("What's your hero's real name?");
+                        newHeroRealName = scannerTwo.next();
+                        if (newHeroRealName.matches("[A-Z][a-zA-Z]*")) {
+                            userHero.setName(newHeroRealName);
+                            checkName = 1;
+                        } else {
+                            System.out.println("Invalid name.. try again.");
+                        }
+                    } while (checkName == 0);
+
+
+                    //Asking user to input hero's surname and validating it's alphabetical
+                    String newHeroSurname = "";
+                    int checkSurname = 0;
+
+                    do {
+                        System.out.println("What's your hero's surname?");
+                        newHeroSurname = scannerTwo.next();
+                        if (newHeroSurname.matches("[A-Z][a-zA-Z]*")) {
+                            userHero.setSurname(newHeroSurname);
+                            checkSurname = 1;
+                        } else {
+                            System.out.println("Invalid surname.. try again.");
+                        }
+                    } while (checkSurname == 0);
+
 
                     //Setting heroID randomly
                     int newHeroID = (int) (Math.random() * 100);
@@ -139,28 +161,32 @@ public class HeroApp2 {
                     //Asking user to input hero's deedTime
                     System.out.println("How many hours a week does your superhero spend on good deeds?");
                     int newHeroDeedTime = scannerTwo.nextInt();
-                    userHero.setDeedTime(newHeroDeedTime);
+                    if (newHeroDeedTime >= 0 && newHeroDeedTime <= 168) {
+                        userHero.setDeedTime(newHeroDeedTime);
+                    } else {
+                        System.out.println("Make sure you've input a number between 0 and 168");
+                    }
 
-                    //Calculating and setting userHero salary using a custom method
-                    userHero.setHeroSalary(userHero.calculatedSalary());
+                //Calculating and setting userHero salary using a custom method
+                userHero.setHeroSalary(userHero.calculatedSalary());
 
-                    //Asking user to pick their hero's district
-                    System.out.println("Enter the District this hero will live in (DISTRICT1 | DISTRICT12 | DISTRICT16): ");
-                    String userHeroDistrict = scannerTwo.next();
-                    if (userHeroDistrict.equalsIgnoreCase("district1")) {
-                        district1.addNewPerson(userHero);
-                    } else if (userHeroDistrict.equalsIgnoreCase("district12")) {
-                        district12.addNewPerson(userHero);
-                    } else if (userHeroDistrict.equalsIgnoreCase("district16")) {
-                        district16.addNewPerson(userHero);
-                    } else
-                        System.out.println("Sorry, such district doesn't exist!");
-                    System.out.println();
-                    superHeroes.add(userHero);
+                //Asking user to pick their hero's district
+                System.out.println("Enter the District this hero will live in (DISTRICT1 (\"d1\") | DISTRICT12 (\"d12\")| DISTRICT16 (\"d16\")): ");
+                String userHeroDistrict = scannerTwo.next();
+                if (userHeroDistrict.equalsIgnoreCase("d1")) {
+                    district1.addNewPerson(userHero);
+                } else if (userHeroDistrict.equalsIgnoreCase("d12")) {
+                    district12.addNewPerson(userHero);
+                } else if (userHeroDistrict.equalsIgnoreCase("d16")) {
+                    district16.addNewPerson(userHero);
+                } else
+                    System.out.println("Sorry, such district doesn't exist!");
+                System.out.println();
+                superHeroes.add(userHero);
 
-                    System.out.println("Hero successfully added!");
-                    System.out.println();
-                    break;
+                System.out.println("Hero successfully added!");
+                System.out.println();
+                break;
                 case 3:
                     //Using another switch-case to show specific hero information
                     System.out.println("Enter a hero name from the superhero list: ");
@@ -351,7 +377,7 @@ public class HeroApp2 {
                 default:
                     if (menuEntry != 0)
                         System.out.println("Menu item does not exist!");
-                        System.out.println();
+                    System.out.println();
 
             }
         }
@@ -379,6 +405,7 @@ public class HeroApp2 {
             return o1.getVillainName().compareToIgnoreCase(o2.getVillainName());
         }
     }
+
 
 }
 
