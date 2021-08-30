@@ -3,6 +3,7 @@ import java.util.*;
 public class HeroApp2 {
     public static void main(String[] args) {
 
+        DBconnection heroDb = new DBconnection();
 
         //Adding Districts and Persons (heroes and villains)
         Hero dogoMom = new Hero("Liza", "Simanovica", 101, "DogoMom", 5327, 115);
@@ -76,9 +77,13 @@ public class HeroApp2 {
         // MENU
         // -- I would like to see a MENU to select different parts of superhero information card
         // 1. A list of superheroes
-        // 2. Add new superhero
-        // 3. show specific superhero information
-        // 4. Delete the superhero from the list
+         // 3. show specific superhero information
+                // a list of villains
+                // info on villains
+                // a list of districts
+                // info on districts
+            // 2. Add new superhero //OR VILLAIN
+            // 4. Delete the superhero // OR VILLAIN from the list
         // 0. Exit
 
 
@@ -105,85 +110,104 @@ public class HeroApp2 {
 //                        for (String s : district.districtHeroList()) {
 //                            System.out.println(s);
 //                        }
+////                    }
+//                    int index = 0;
+//                    for (int i = 0; i < superHeroes.size(); i++) {
+//                        Hero hero = superHeroes.get(i);
+//                        index++;
+//                        System.out.println(index + " | " + hero.getHeroName());
 //                    }
-                    int index = 0;
-                    for (int i = 0; i < superHeroes.size(); i++) {
-                        Hero hero = superHeroes.get(i);
-                        index++;
-                        System.out.println(index + " | " + hero.getHeroName());
-                    }
+
+                    heroDb.getHeroes();
 
                     System.out.println("================= SUPERHERO LIST ================");
                     System.out.println();
                     break;
                 case 2:
-                    //Asking user to input heroName
+                    Hero hero = new Hero();
+                    System.out.println("Enter the NAME of the hero you'd like to add: ");
+                    hero.setName(scannerTwo.next());
+                    System.out.println("Enter the SURNAME of the hero you'd like to add: ");
+                    hero.setSurname(scannerTwo.next());
                     System.out.println("Enter the HERONAME of the hero you'd like to add: ");
-                    String newHeroName = scannerTwo.next();
-                    userHero.setHeroName(newHeroName);
-
-                    //Asking user to input hero's real name and validating it's alphabetical
-                    String newHeroRealName;
-                    int checkName = 0;
-
-                    do {
-                        System.out.println("What's your hero's real name?");
-                        newHeroRealName = scannerTwo.next();
-                        if (newHeroRealName.matches("[A-Z][a-zA-Z]*")) {
-                            userHero.setName(newHeroRealName);
-                            checkName = 1;
-                        } else {
-                            System.out.println("Invalid name.. try again.");
-                        }
-                    } while (checkName == 0);
+                    hero.setHeroName(scannerTwo.next());
+                    System.out.println("Enter the HEROSALARY of the hero you'd like to add: ");
+                    hero.setHeroSalary(scannerTwo.nextDouble());
+                    System.out.println("Enter the HERODEEDTIME of the hero you'd like to add: ");
+                    hero.setDeedTime(scannerTwo.nextInt());
 
 
-                    //Asking user to input hero's surname and validating it's alphabetical
-                    String newHeroSurname;
-                    int checkSurname = 0;
-
-                    do {
-                        System.out.println("What's your hero's surname?");
-                        newHeroSurname = scannerTwo.next();
-                        if (newHeroSurname.matches("[A-Z][a-zA-Z]*")) {
-                            userHero.setSurname(newHeroSurname);
-                            checkSurname = 1;
-                        } else {
-                            System.out.println("Invalid surname.. try again.");
-                        }
-                    } while (checkSurname == 0);
+                    heroDb.createHero(hero);
 
 
-                    //Setting heroID randomly
-                    int newHeroID = (int) (Math.random() * 100);
-                    userHero.setHeroID(newHeroID);
 
-                    //Asking user to input hero's deedTime
-                    System.out.println("How many hours a week does your superhero spend on good deeds?");
-                    int newHeroDeedTime = scannerTwo.nextInt();
-                    if (newHeroDeedTime >= 0 && newHeroDeedTime <= 168) {
-                        userHero.setDeedTime(newHeroDeedTime);
-                    } else {
-                        System.out.println("Make sure you've input a number between 0 and 168");
-                    }
-
-                //Calculating and setting userHero salary using a custom method
-                userHero.setHeroSalary(userHero.calculatedSalary());
-
-                //Asking user to pick their hero's district
-                System.out.println("Choose the District this hero will live in!");
-                System.out.println("DISTRICT1 (type -> \"d1\") | DISTRICT12 (type -> \"d12\")| DISTRICT16 (type -> \"d16\")): ");
-                String userHeroDistrict = scannerTwo.next();
-                if (userHeroDistrict.equalsIgnoreCase("d1")) {
-                    district1.addNewPerson(userHero);
-                } else if (userHeroDistrict.equalsIgnoreCase("d12")) {
-                    district12.addNewPerson(userHero);
-                } else if (userHeroDistrict.equalsIgnoreCase("d16")) {
-                    district16.addNewPerson(userHero);
-                } else
-                    System.out.println("Sorry, such district doesn't exist!");
-                System.out.println();
-                superHeroes.add(userHero);
+                    //Asking user to input heroName
+//                    System.out.println("Enter the HERONAME of the hero you'd like to add: ");
+//                    String newHeroName = scannerTwo.next();
+//                    userHero.setHeroName(newHeroName);
+//
+//                    //Asking user to input hero's real name and validating it's alphabetical
+//                    String newHeroRealName;
+//                    int checkName = 0;
+//
+//                    do {
+//                        System.out.println("What's your hero's real name?");
+//                        newHeroRealName = scannerTwo.next();
+//                        if (newHeroRealName.matches("[A-Z][a-zA-Z]*")) {
+//                            userHero.setName(newHeroRealName);
+//                            checkName = 1;
+//                        } else {
+//                            System.out.println("Invalid name.. try again.");
+//                        }
+//                    } while (checkName == 0);
+//
+//
+//                    //Asking user to input hero's surname and validating it's alphabetical
+//                    String newHeroSurname;
+//                    int checkSurname = 0;
+//
+//                    do {
+//                        System.out.println("What's your hero's surname?");
+//                        newHeroSurname = scannerTwo.next();
+//                        if (newHeroSurname.matches("[A-Z][a-zA-Z]*")) {
+//                            userHero.setSurname(newHeroSurname);
+//                            checkSurname = 1;
+//                        } else {
+//                            System.out.println("Invalid surname.. try again.");
+//                        }
+//                    } while (checkSurname == 0);
+//
+//
+//                    //Setting heroID randomly
+//                    int newHeroID = (int) (Math.random() * 100);
+//                    userHero.setHeroID(newHeroID);
+//
+//                    //Asking user to input hero's deedTime
+//                    System.out.println("How many hours a week does your superhero spend on good deeds?");
+//                    int newHeroDeedTime = scannerTwo.nextInt();
+//                    if (newHeroDeedTime >= 0 && newHeroDeedTime <= 168) {
+//                        userHero.setDeedTime(newHeroDeedTime);
+//                    } else {
+//                        System.out.println("Make sure you've input a number between 0 and 168");
+//                    }
+//
+//                //Calculating and setting userHero salary using a custom method
+//                userHero.setHeroSalary(userHero.calculatedSalary());
+//
+//                //Asking user to pick their hero's district
+//                System.out.println("Choose the District this hero will live in!");
+//                System.out.println("DISTRICT1 (type -> \"d1\") | DISTRICT12 (type -> \"d12\")| DISTRICT16 (type -> \"d16\")): ");
+//                String userHeroDistrict = scannerTwo.next();
+//                if (userHeroDistrict.equalsIgnoreCase("d1")) {
+//                    district1.addNewPerson(userHero);
+//                } else if (userHeroDistrict.equalsIgnoreCase("d12")) {
+//                    district12.addNewPerson(userHero);
+//                } else if (userHeroDistrict.equalsIgnoreCase("d16")) {
+//                    district16.addNewPerson(userHero);
+//                } else
+//                    System.out.println("Sorry, such district doesn't exist!");
+//                System.out.println();
+//                superHeroes.add(userHero);
 
                 System.out.println("Hero successfully added!");
                 System.out.println();
