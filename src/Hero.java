@@ -58,6 +58,7 @@ public class Hero extends Person {
     //calculated salary based on deedTime (currently only for userHero)
     public double calculatedSalary() {
         int hourlyRate = 35;
+
         return deedTime*hourlyRate;
     }
 
